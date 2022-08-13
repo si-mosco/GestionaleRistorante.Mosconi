@@ -1,0 +1,103 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.IO;
+
+namespace GestionaleRistorante.Mosconi
+{
+    public partial class Form4 : Form
+    {
+        public Form4()
+        {
+            InitializeComponent();
+        }
+
+        public struct Cibo
+        {
+            public string Nome;
+            public double Prezzo;
+            public string[] Ingredienti;
+            public string Portata;
+        }
+
+        private void Form4_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Cibo Piatto;
+            Piatto.Ingredienti = new string[4];
+
+            Piatto.Nome = "";
+            Piatto.Prezzo = 0;
+            Piatto.Portata = "";
+            for (int i = 0; i < 4; i++)
+                Piatto.Ingredienti[i] = "";
+
+            try
+            {
+                Piatto.Nome = textBox1.Text;
+            }
+            catch
+            {
+                MessageBox.Show("Nome non valido");
+                textBox1.Text = "";
+            }
+
+            try
+            {
+                Piatto.Prezzo = double.Parse(textBox2.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Prezzo non valido");
+                textBox2.Text = "";
+            }
+
+            if (textBox3.Text == "Antipasti" || textBox3.Text == "Primi" || textBox3.Text == "Secondi" || textBox3.Text == "Dessert")
+                Piatto.Portata = textBox3.Text;
+            else
+            {
+                MessageBox.Show("Portata non valida");
+                textBox3.Text = "";
+            }
+
+            try
+            {
+                Piatto.Ingredienti[0] = textBox4.Text;
+                Piatto.Ingredienti[1] = textBox5.Text;
+                Piatto.Ingredienti[2] = textBox6.Text;
+                Piatto.Ingredienti[3] = textBox7.Text;
+            }
+            catch
+            {
+                MessageBox.Show("Ingredienti non validi");
+                textBox4.Text = "";
+                textBox5.Text = "";
+                textBox6.Text = "";
+                textBox7.Text = "";
+            }
+
+            Aggiungi(Piatto);
+
+            MessageBox.Show("Agginta eseguita con successo");
+            this.Close();
+        }
+        public static void Aggiungi(Cibo piattino)
+        {
+            StreamWriter sw = new StreamWriter(@"./Menù.txt");
+
+            sw.WriteLine($"|{piattino.Nome}|,{piattino.Prezzo},_{piattino.Portata}_#{piattino.Ingredienti[0]}#@{piattino.Ingredienti[1]}@°{piattino.Ingredienti[2]}°^{piattino.Ingredienti[3]}^");
+
+            sw.Close();
+        }
+    }
+}

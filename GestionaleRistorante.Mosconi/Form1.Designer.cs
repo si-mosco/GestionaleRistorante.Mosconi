@@ -35,6 +35,8 @@ namespace GestionaleRistorante.Mosconi
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button1
@@ -93,14 +95,36 @@ namespace GestionaleRistorante.Mosconi
             // 
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.SystemColors.Window;
-            this.label1.Font = new System.Drawing.Font("Modern No. 20", 40.25F, System.Drawing.FontStyle.Bold);
-            this.label1.ForeColor = System.Drawing.SystemColors.ControlDark;
-            this.label1.Location = new System.Drawing.Point(73, 20);
+            this.label1.Font = new System.Drawing.Font("Modern No. 20", 41.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.SystemColors.ActiveCaption;
+            this.label1.Location = new System.Drawing.Point(74, 24);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(160, 55);
+            this.label1.Size = new System.Drawing.Size(164, 57);
             this.label1.TabIndex = 6;
             this.label1.Text = "Login";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.label4.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label4.Location = new System.Drawing.Point(107, 107);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 31);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "Nome";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 20F);
+            this.label5.ForeColor = System.Drawing.SystemColors.ControlDark;
+            this.label5.Location = new System.Drawing.Point(89, 220);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(134, 31);
+            this.label5.TabIndex = 9;
+            this.label5.Text = "Password";
             // 
             // Form1
             // 
@@ -110,8 +134,10 @@ namespace GestionaleRistorante.Mosconi
             this.ClientSize = new System.Drawing.Size(314, 369);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.label5);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.label4);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Name = "Form1";
@@ -130,6 +156,8 @@ namespace GestionaleRistorante.Mosconi
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label label5;
     }
 }
 
