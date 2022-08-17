@@ -21,5 +21,10 @@ namespace GestionaleRistorante.Mosconi
         {
 
         }
+
+        private void Form9_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Visible = false;
+        }
     }
 }

@@ -105,6 +105,7 @@ namespace GestionaleRistorante.Mosconi
             this.Controls.Add(this.label1);
             this.Name = "Form5";
             this.Text = "Ricerca";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form5_FormClosing);
             this.Load += new System.EventHandler(this.Form5_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

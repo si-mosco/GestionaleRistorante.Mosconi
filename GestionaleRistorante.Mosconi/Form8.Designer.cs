@@ -54,6 +54,7 @@ namespace GestionaleRistorante.Mosconi
             this.Controls.Add(this.label1);
             this.Name = "Form8";
             this.Text = "Elimina";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form8_FormClosing);
             this.Load += new System.EventHandler(this.Form8_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

@@ -35,7 +35,15 @@ namespace GestionaleRistorante.Mosconi
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Aggiunta.Show();
+            int i = 0;
+            if (i == 0)
+            {
+                Aggiunta.Show();
+            }
+            else
+            {
+                Aggiunta.Visible = true;
+            }
         }
 
         private void button4_Click(object sender, EventArgs e)

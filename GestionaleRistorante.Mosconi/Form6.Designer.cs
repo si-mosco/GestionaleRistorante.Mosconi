@@ -54,6 +54,7 @@ namespace GestionaleRistorante.Mosconi
             this.Controls.Add(this.label1);
             this.Name = "Form6";
             this.Text = "Modifica";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form6_FormClosing);
             this.Load += new System.EventHandler(this.Form6_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

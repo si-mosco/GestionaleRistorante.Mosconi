@@ -107,7 +107,7 @@ namespace GestionaleRistorante.Mosconi
             this.button5.Name = "button5";
             this.button5.Size = new System.Drawing.Size(237, 42);
             this.button5.TabIndex = 16;
-            this.button5.Text = "Visualizza Cibo";
+            this.button5.Text = "Visualizza Cibi";
             this.button5.UseVisualStyleBackColor = true;
             this.button5.Click += new System.EventHandler(this.button5_Click);
             // 

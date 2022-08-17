@@ -54,6 +54,7 @@ namespace GestionaleRistorante.Mosconi
             this.Controls.Add(this.label1);
             this.Name = "Form9";
             this.Text = "Recupera";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form9_FormClosing);
             this.Load += new System.EventHandler(this.Form9_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

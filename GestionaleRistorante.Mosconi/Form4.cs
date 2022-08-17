@@ -88,16 +88,41 @@ namespace GestionaleRistorante.Mosconi
 
             Aggiungi(Piatto);
 
-            MessageBox.Show("Agginta eseguita con successo");
-            this.Close();
+            MessageBox.Show("Aggiunta eseguita con successo");
         }
         public static void Aggiungi(Cibo piattino)
         {
-            StreamWriter sw = new StreamWriter(@"./Menù.txt");
+            StreamReader sr = new StreamReader((@"./Menù.txt"));
+            StreamWriter sw = new StreamWriter(@"./Menù2.txt");
 
-            sw.WriteLine($"|{piattino.Nome}|,{piattino.Prezzo},_{piattino.Portata}_#{piattino.Ingredienti[0]}#@{piattino.Ingredienti[1]}@°{piattino.Ingredienti[2]}°^{piattino.Ingredienti[3]}^");
+            string line = "";
+            int i = 0;
 
+            while (!sr.EndOfStream)
+            {
+                line = sr.ReadLine();
+
+                if (line.Substring(0, 1) != " " && i == 0)
+                {
+                    sw.WriteLine(line);
+                }
+                else
+                {
+                    sw.WriteLine($"|{piattino.Nome}|,{piattino.Prezzo},_{piattino.Portata}_#{piattino.Ingredienti[0]}#@{piattino.Ingredienti[1]}@°{piattino.Ingredienti[2]}°^{piattino.Ingredienti[3]}^");
+                    sw.WriteLine("+");
+                    i = 1;
+                }
+            }
+            sr.Close();
             sw.Close();
+
+            System.IO.File.Delete(@"./Menù.txt");
+            System.IO.File.Move(@"./Menù2.txt", @"./Menù.txt");
+        }
+
+        private void Form4_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            this.Visible = false;
         }
     }
 }
