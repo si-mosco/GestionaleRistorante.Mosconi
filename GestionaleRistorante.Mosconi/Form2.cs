@@ -48,27 +48,68 @@ namespace GestionaleRistorante.Mosconi
 
         private void button4_Click(object sender, EventArgs e)
         {
-            Ricerca.Show();
+            int i = 0;
+            if (i == 0)
+            {
+                Ricerca.Show();
+            }
+            else
+            {
+                Ricerca.Visible = true;
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            Modifica.Show();
+            int i = 0;
+            if (i == 0)
+            {
+                Modifica.Show();
+            }
+            else
+            {
+                Modifica.Visible = true;
+            }
         }
 
         private void button5_Click(object sender, EventArgs e)
         {
-            Visualizza.Show();
+            int i = 0;
+            if (i == 0)
+            {
+                Visualizza.Show();
+            }
+            else
+            {
+                Visualizza.Visible = true;
+            }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Elimina.Show();
+            int i = 0;
+            if (i == 0)
+            {
+                Elimina.Show();
+            }
+            else
+            {
+                Elimina.Visible = true;
+            }
         }
 
         private void button6_Click(object sender, EventArgs e)
         {
-            Recupera.Show();
+            
+            int i = 0;
+            if (i == 0)
+            {
+                Recupera.Show();
+            }
+            else
+            {
+                Recupera.Visible = true;
+            }
         }
     }
 }

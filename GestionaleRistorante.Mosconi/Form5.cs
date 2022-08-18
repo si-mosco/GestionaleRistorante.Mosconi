@@ -39,17 +39,32 @@ namespace GestionaleRistorante.Mosconi
             StreamReader sr = new StreamReader((@"./Menù.txt"));
 
             line = sr.ReadLine();
+
+            Cibo finale;
+            finale.Nome = "controllo";
+            finale.Prezzo = 0;
+            finale.Portata = "";
+            finale.Ingredienti = new string[4];
+            finale.Ingredienti[0] = "";
+
+
+
             while (line!="+")
             {
                 Cibo nome = Estrai(line);
 
                 if (Name == nome.Nome)
                 {
-                    MessageBox.Show($"{nome.Portata} - {nome.Nome} ({nome.Ingredienti[0]}, {nome.Ingredienti[1]}, {nome.Ingredienti[2]}, {nome.Ingredienti[3]}) - {nome.Prezzo} €");
+                    finale = nome;
                 }
 
                 line = sr.ReadLine();
             }
+
+            if (finale.Nome == "controllo")
+                MessageBox.Show("Cibo non Trovato");
+            else
+                MessageBox.Show($"{finale.Portata} - {finale.Nome} ({finale.Ingredienti[0]}, {finale.Ingredienti[1]}, {finale.Ingredienti[2]}, {finale.Ingredienti[3]}) - {finale.Prezzo} €");
         }
 
         public static Cibo Estrai(string line)
