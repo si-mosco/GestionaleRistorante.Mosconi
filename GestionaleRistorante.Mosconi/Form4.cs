@@ -13,6 +13,7 @@ namespace GestionaleRistorante.Mosconi
 {
     public partial class Form4 : Form
     {
+        string filename = @"Menù.txt";
         public Form4()
         {
             InitializeComponent();
@@ -28,7 +29,7 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form4_Load(object sender, EventArgs e)
         {
-
+            comboBox1.DropDownStyle = ComboBoxStyle.DropDownList;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -42,6 +43,7 @@ namespace GestionaleRistorante.Mosconi
             for (int i = 0; i < 4; i++)
                 Piatto.Ingredienti[i] = "";
 
+            bool tri = false;
             try
             {
                 Piatto.Nome = textBox1.Text;
@@ -50,28 +52,30 @@ namespace GestionaleRistorante.Mosconi
             {
                 MessageBox.Show("Nome non valido");
                 textBox1.Text = "";
+                tri = true;
             }
 
             try
             {
-                Piatto.Prezzo = double.Parse(textBox2.Text);
+                Piatto.Prezzo = double.Parse(textBox2.Text.Replace(".", ","));
             }
             catch
             {
                 MessageBox.Show("Prezzo non valido");
                 textBox2.Text = "";
+                tri = true;
             }
 
-            if (textBox3.Text == "Antipasti" || textBox3.Text == "Primi" || textBox3.Text == "Secondi" || textBox3.Text == "Dessert")
-                Piatto.Portata = textBox3.Text;
+            if (comboBox1.Text!=string.Empty)
+                Piatto.Portata = comboBox1.Text;
             else
             {
                 MessageBox.Show("Portata non valida");
-                textBox3.Text = "";
+                tri = true;
             }
 
             try
-            {
+            { 
                 Piatto.Ingredienti[0] = textBox4.Text;
                 Piatto.Ingredienti[1] = textBox5.Text;
                 Piatto.Ingredienti[2] = textBox6.Text;
@@ -84,31 +88,36 @@ namespace GestionaleRistorante.Mosconi
                 textBox5.Text = "";
                 textBox6.Text = "";
                 textBox7.Text = "";
+                tri = true;
             }
 
-            Aggiungi(Piatto);
-
-            MessageBox.Show("Aggiunta eseguita con successo");
+            if (!tri)
+            {
+                Aggiungi(Piatto, filename);
+                MessageBox.Show("Aggiunta eseguita con successo");
+            }
         }
-        public static void Aggiungi(Cibo piattino)
+        public static void Aggiungi(Cibo piattino, string filename)
         {
-            StreamReader sr = new StreamReader((@"./Menù.txt"));
+            var Q = new FileStream(filename, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            Q.Close();
+            StreamReader sr = new StreamReader(filename);
             StreamWriter sw = new StreamWriter(@"./Menù2.txt");
 
             string line = "";
             int i = 0;
 
-            while (!sr.EndOfStream)
+            while (!sr.EndOfStream || i != 1)
             {
                 line = sr.ReadLine();
 
-                if (line.Substring(0, 1) != " " && i == 0)
+                if (line != null && (line.Substring(0, 1) != "+" && i == 0))
                 {
                     sw.WriteLine(line);
                 }
                 else
                 {
-                    sw.WriteLine($"|{piattino.Nome}|,{piattino.Prezzo},_{piattino.Portata}_#{piattino.Ingredienti[0]}#@{piattino.Ingredienti[1]}@°{piattino.Ingredienti[2]}°^{piattino.Ingredienti[3]}^");
+                    sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
                     sw.WriteLine("+");
                     i = 1;
                 }
@@ -116,12 +125,21 @@ namespace GestionaleRistorante.Mosconi
             sr.Close();
             sw.Close();
 
-            System.IO.File.Delete(@"./Menù.txt");
-            System.IO.File.Move(@"./Menù2.txt", @"./Menù.txt");
+            System.IO.File.Delete(filename);
+            System.IO.File.Move(@"./Menù2.txt", filename);
         }
 
         private void Form4_FormClosing(object sender, FormClosingEventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
+            textBox4.Text = "";
+            textBox5.Text = "";
+            textBox6.Text = "";
+            textBox7.Text = "";
+            comboBox1.Text = string.Empty;
+
+            e.Cancel = true;
             this.Visible = false;
         }
     }
