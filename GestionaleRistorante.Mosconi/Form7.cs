@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using static System.Net.WebRequestMethods;
 
 namespace GestionaleRistorante.Mosconi
 {
@@ -28,11 +29,30 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form7_Load(object sender, EventArgs e)
         {
+            listView1.View = View.Details;
+            listView1.FullRowSelect = true;
+
+            listView1.Columns.Add("Nome");
+            listView1.Columns.Add("Prezzo");
+            listView1.Columns.Add("Portata");
+            listView1.Columns.Add("Ingredienti");
+
 
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            StreamReader sr = new StreamReader((@"./Menù.txt"));
+            string line = sr.ReadLine();
+
+            string[] cose = line.Split(';');
+            string[] items2 = new string[cose.Length - 1];
+            for (int i = 0; i < items2.Length; i++)
+                items2[i] = cose[i];
+
+            ListViewItem item = new ListViewItem(items2);
+            listView1.Items.Add(item);
+            /*
             string line = "";
 
             StreamReader sr = new StreamReader((@"./Menù.txt"));
@@ -42,41 +62,16 @@ namespace GestionaleRistorante.Mosconi
             {
                 if (line.Substring(0, 1) != "§")
                 {
-                    Cibo nome = Estrai(line);
-                    MessageBox.Show($"{nome.Portata} - {nome.Nome} ({nome.Ingredienti[0]}, {nome.Ingredienti[1]}, {nome.Ingredienti[2]}, {nome.Ingredienti[3]}) - {nome.Prezzo} €");
+                    //Cibo finale = Estrai(line);
+                    //MessageBox.Show($"PORTATA: {finale.Portata}\nNOME: {finale.Nome}\nINGREDIENTI: {finale.Ingredienti[0]}, {finale.Ingredienti[1]}, {finale.Ingredienti[2]}, {finale.Ingredienti[3]}\nPREZZO: €{finale.Prezzo}");
                 }
-
                 line = sr.ReadLine();
             }
-
-            MessageBox.Show("Fine");
+            MessageBox.Show("Fine");*/
         }
-
-        public static Cibo Estrai(string line)
+        public static void Estrai(string line, string[] items)
         {
-            Cibo v;
-            v.Ingredienti = new string[4];
-
-            string[] caratteri = new string[7] { "|", ",", "_", "#", "@", "°", "^" };
-            int[] fineCaratteri = new int[7];
-            for (int j = 0; j < 7; j++)
-            {
-                for (int i = 1; i < line.Length; i++)
-                {
-                    if (line.Substring(i, 1) == caratteri[j])
-                    {
-                        fineCaratteri[j] = i;
-                    }
-                }
-            }
-            v.Nome = line.Substring(1, fineCaratteri[0] - 1);
-            v.Prezzo = double.Parse(line.Substring(fineCaratteri[0] + 2, (fineCaratteri[1]) - (fineCaratteri[0] + 2)));
-            v.Portata = line.Substring(fineCaratteri[1] + 2, (fineCaratteri[2] - 1) - (fineCaratteri[1] + 2) + 1);
-            v.Ingredienti[0] = line.Substring(fineCaratteri[2] + 2, (fineCaratteri[3] - 1) - (fineCaratteri[2] + 2) + 1);
-            v.Ingredienti[1] = line.Substring(fineCaratteri[3] + 2, (fineCaratteri[4] - 1) - (fineCaratteri[3] + 2) + 1);
-            v.Ingredienti[2] = line.Substring(fineCaratteri[4] + 2, (fineCaratteri[5] - 1) - (fineCaratteri[4] + 2) + 1);
-            v.Ingredienti[3] = line.Substring(fineCaratteri[5] + 2, (line.Length - 1) - (fineCaratteri[5] + 2));
-            return v;
+            items = line.Split(';');
         }
 
         private void Form7_FormClosing(object sender, FormClosingEventArgs e)

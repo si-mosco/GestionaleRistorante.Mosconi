@@ -24,6 +24,7 @@ namespace GestionaleRistorante.Mosconi
             public double Prezzo;
             public string[] Ingredienti;
             public string Portata;
+            public bool Eliminato;
         }
 
         string filename = @"Menù.txt";
@@ -35,7 +36,7 @@ namespace GestionaleRistorante.Mosconi
 
         private void button1_Click(object sender, EventArgs e)
         {
-            string Name = textBox1.Text;
+            string Name = textBox1.Text.ToUpper();
             string line = "";
 
             StreamReader sr = new StreamReader(filename);
@@ -53,15 +54,17 @@ namespace GestionaleRistorante.Mosconi
 
             while (line!="+")
             {
+                //MessageBox.Show($"'{line}'");
                 Cibo nome = Estrai(line);
 
-                if (Name == nome.Nome)
+                if (Name == nome.Nome&&nome.Eliminato)
                 {
                     finale.Nome = nome.Nome;
                     finale.Prezzo = nome.Prezzo;
                     finale.Portata = nome.Portata;
                     for (int i = 0; i < nome.Ingredienti.Length; i++)
                         finale.Ingredienti[i] = nome.Ingredienti[i];
+                    line = "+";
                 }
 
                 line = sr.ReadLine();
@@ -83,10 +86,12 @@ namespace GestionaleRistorante.Mosconi
             v.Nome = campi[0];
             v.Prezzo = double.Parse(campi[1]);
             v.Portata = campi[2];
-            v.Ingredienti[0] = campi[3];
-            v.Ingredienti[1] = campi[4];
-            v.Ingredienti[2] = campi[5];
-            v.Ingredienti[3] = campi[6];
+            string[] ing = campi[3].Split(',');
+
+            for (int i = 0; i < ing.Length; i++)
+                v.Ingredienti[i] = ing[i];
+
+            v.Eliminato = bool.Parse(campi[4]);
 
             return v;
         }

@@ -25,6 +25,7 @@ namespace GestionaleRistorante.Mosconi
             public double Prezzo;
             public string[] Ingredienti;
             public string Portata;
+            public bool Eliminato;
         }
 
         private void Form4_Load(object sender, EventArgs e)
@@ -35,6 +36,7 @@ namespace GestionaleRistorante.Mosconi
         private void button1_Click(object sender, EventArgs e)
         {
             Cibo Piatto;
+            Piatto.Eliminato = true;
             Piatto.Ingredienti = new string[4];
 
             Piatto.Nome = "";
@@ -117,7 +119,7 @@ namespace GestionaleRistorante.Mosconi
                 }
                 else
                 {
-                    sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
+                    sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()},{piattino.Ingredienti[1].ToUpper()},{piattino.Ingredienti[2].ToUpper()},{piattino.Ingredienti[3].ToUpper()};{piattino.Eliminato};"); 
                     sw.WriteLine("+");
                     i = 1;
                 }

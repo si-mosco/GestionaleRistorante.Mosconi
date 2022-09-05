@@ -21,7 +21,6 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -42,6 +41,8 @@ namespace GestionaleRistorante.Mosconi
                 textBox1.Text = "";
                 textBox2.Text = "";
             }
+            this.Hide();
+            Proprietario.Show();
         }
     }
 }
