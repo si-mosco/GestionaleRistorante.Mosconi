@@ -18,6 +18,8 @@ namespace GestionaleRistorante.Mosconi
             InitializeComponent();
         }
 
+        string filename = @"Menù.txt";
+
         public struct Cibo
         {
             public string Nome;
@@ -33,6 +35,10 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form6_FormClosing(object sender, FormClosingEventArgs e)
         {
+            textBox1.Text = "";
+            textBox2.Text = "";
+
+            e.Cancel = true;
             this.Visible = false;
         }
 
@@ -58,24 +64,24 @@ namespace GestionaleRistorante.Mosconi
                 string Name = textBox1.Text;
                 string line = "";
 
-                StreamReader sr = new StreamReader((@"./Menù.txt"));
+                StreamReader sr = new StreamReader(filename);
                 StreamWriter sw = new StreamWriter(@"./Menù2.txt");
 
                 line = sr.ReadLine();
 
                 while (line != "+")
                 {
-                    Cibo nome = Estrai(line);
+                    Cibo piattino = Estrai(line);
 
-                    if (Name == nome.Nome)
+                    if (Name == piattino.Nome)
                     {
                         if (checkedListBox1.GetItemChecked(0) == true)
                         {
                             try
                             {
                                 double nuovo = double.Parse(textBox2.Text);
-                                nome.Prezzo = nuovo;
-                                sw.WriteLine($"|{nome.Nome}|,{nome.Prezzo},_{nome.Portata}_#{nome.Ingredienti[0]}#@{nome.Ingredienti[1]}@°{nome.Ingredienti[2]}°^{nome.Ingredienti[3]}^");
+                                piattino.Prezzo = nuovo;
+                                sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
                             }
                             catch
                             {
@@ -87,8 +93,8 @@ namespace GestionaleRistorante.Mosconi
                         {
                             if (textBox2.Text == "Antipasti" || textBox2.Text == "Primi" || textBox2.Text == "Secondi" || textBox2.Text == "Dessert")
                             {
-                                nome.Portata = textBox2.Text;
-                                sw.WriteLine($"|{nome.Nome}|,{nome.Prezzo},_{nome.Portata}_#{nome.Ingredienti[0]}#@{nome.Ingredienti[1]}@°{nome.Ingredienti[2]}°^{nome.Ingredienti[3]}^");
+                                piattino.Portata = textBox2.Text;
+                                sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
                             }
                             else
                             {
@@ -98,23 +104,23 @@ namespace GestionaleRistorante.Mosconi
                         }
                         else if(checkedListBox1.GetItemChecked(2) == true)
                         {
-                            nome.Ingredienti[0] = textBox2.Text;
-                            sw.WriteLine($"|{nome.Nome}|,{nome.Prezzo},_{nome.Portata}_#{nome.Ingredienti[0]}#@{nome.Ingredienti[1]}@°{nome.Ingredienti[2]}°^{nome.Ingredienti[3]}^");
+                            piattino.Ingredienti[0] = textBox2.Text;
+                            sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
                         }
                         else if (checkedListBox1.GetItemChecked(3) == true)
                         {
-                            nome.Ingredienti[1] = textBox2.Text;
-                            sw.WriteLine($"|{nome.Nome}|,{nome.Prezzo},_{nome.Portata}_#{nome.Ingredienti[0]}#@{nome.Ingredienti[1]}@°{nome.Ingredienti[2]}°^{nome.Ingredienti[3]}^");
+                            piattino.Ingredienti[1] = textBox2.Text;
+                            sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
                         }
                         else if (checkedListBox1.GetItemChecked(4) == true)
                         {
-                            nome.Ingredienti[2] = textBox2.Text;
-                            sw.WriteLine($"|{nome.Nome}|,{nome.Prezzo},_{nome.Portata}_#{nome.Ingredienti[0]}#@{nome.Ingredienti[1]}@°{nome.Ingredienti[2]}°^{nome.Ingredienti[3]}^");
+                            piattino.Ingredienti[2] = textBox2.Text;
+                            sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
                         }
                         else if (checkedListBox1.GetItemChecked(5) == true)
                         {
-                            nome.Ingredienti[4] = textBox2.Text;
-                            sw.WriteLine($"|{nome.Nome}|,{nome.Prezzo},_{nome.Portata}_#{nome.Ingredienti[0]}#@{nome.Ingredienti[1]}@°{nome.Ingredienti[2]}°^{nome.Ingredienti[3]}^");
+                            piattino.Ingredienti[4] = textBox2.Text;
+                            sw.WriteLine($"{piattino.Nome.ToUpper()};{piattino.Prezzo};{piattino.Portata.ToUpper()};{piattino.Ingredienti[0].ToUpper()};{piattino.Ingredienti[1].ToUpper()};{piattino.Ingredienti[2].ToUpper()};{piattino.Ingredienti[3].ToUpper()};");
                         }
                     }
                     else
@@ -127,8 +133,8 @@ namespace GestionaleRistorante.Mosconi
                 sr.Close();
                 sw.Close();
 
-                System.IO.File.Delete(@"./Menù.txt");
-                System.IO.File.Move(@"./Menù2.txt", @"./Menù.txt");
+                System.IO.File.Delete(filename);
+                System.IO.File.Move(@"./Menù2.txt", filename);
             }
         }
 
@@ -137,27 +143,23 @@ namespace GestionaleRistorante.Mosconi
             Cibo v;
             v.Ingredienti = new string[4];
 
-            string[] caratteri = new string[7] { "|", ",", "_", "#", "@", "°", "^" };
-            int[] fineCaratteri = new int[7];
-            for (int j = 0; j < 7; j++)
-            {
-                for (int i = 1; i < line.Length; i++)
-                {
-                    if (line.Substring(i, 1) == caratteri[j])
-                    {
-                        fineCaratteri[j] = i;
-                    }
-                }
-            }
+            string[] campi = line.Split(';');
 
-            v.Nome = line.Substring(1, fineCaratteri[0] - 1);
-            v.Prezzo = double.Parse(line.Substring(fineCaratteri[0] + 2, (fineCaratteri[1]) - (fineCaratteri[0] + 2)));
-            v.Portata = line.Substring(fineCaratteri[1] + 2, (fineCaratteri[2] - 1) - (fineCaratteri[1] + 2) + 1);
-            v.Ingredienti[0] = line.Substring(fineCaratteri[2] + 2, (fineCaratteri[3] - 1) - (fineCaratteri[2] + 2) + 1);
-            v.Ingredienti[1] = line.Substring(fineCaratteri[3] + 2, (fineCaratteri[4] - 1) - (fineCaratteri[3] + 2) + 1);
-            v.Ingredienti[2] = line.Substring(fineCaratteri[4] + 2, (fineCaratteri[5] - 1) - (fineCaratteri[4] + 2) + 1);
-            v.Ingredienti[3] = line.Substring(fineCaratteri[5] + 2, (line.Length - 1) - (fineCaratteri[5] + 2));
+            v.Nome = campi[0];
+            v.Prezzo = double.Parse(campi[1]);
+            v.Portata = campi[2];
+            v.Ingredienti[0] = campi[3];
+            v.Ingredienti[1] = campi[4];
+            v.Ingredienti[2] = campi[5];
+            v.Ingredienti[3] = campi[6];
+
             return v;
+        }
+
+        private void checkedListBox1_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            for (int ix = 0; ix < checkedListBox1.Items.Count; ix++)
+                if (ix != e.Index) checkedListBox1.SetItemChecked(ix, false);
         }
     }
 }

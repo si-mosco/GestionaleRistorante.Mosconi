@@ -26,6 +26,8 @@ namespace GestionaleRistorante.Mosconi
             public string Portata;
         }
 
+        string filename = @"Menù.txt";
+
         private void Form5_Load(object sender, EventArgs e)
         {
 
@@ -36,7 +38,7 @@ namespace GestionaleRistorante.Mosconi
             string Name = textBox1.Text;
             string line = "";
 
-            StreamReader sr = new StreamReader((@"./Menù.txt"));
+            StreamReader sr = new StreamReader(filename);
 
             line = sr.ReadLine();
 
@@ -55,7 +57,11 @@ namespace GestionaleRistorante.Mosconi
 
                 if (Name == nome.Nome)
                 {
-                    finale = nome;
+                    finale.Nome = nome.Nome;
+                    finale.Prezzo = nome.Prezzo;
+                    finale.Portata = nome.Portata;
+                    for (int i = 0; i < nome.Ingredienti.Length; i++)
+                        finale.Ingredienti[i] = nome.Ingredienti[i];
                 }
 
                 line = sr.ReadLine();
@@ -64,7 +70,7 @@ namespace GestionaleRistorante.Mosconi
             if (finale.Nome == "controllo")
                 MessageBox.Show("Cibo non Trovato");
             else
-                MessageBox.Show($"{finale.Portata} - {finale.Nome} ({finale.Ingredienti[0]}, {finale.Ingredienti[1]}, {finale.Ingredienti[2]}, {finale.Ingredienti[3]}) - {finale.Prezzo} €");
+                MessageBox.Show($"PORTATA: {finale.Portata}\nNOME: {finale.Nome}\nINGREDIENTI: {finale.Ingredienti[0]}, {finale.Ingredienti[1]}, {finale.Ingredienti[2]}, {finale.Ingredienti[3]}\nPREZZO: €{finale.Prezzo}");
         }
 
         public static Cibo Estrai(string line)
@@ -72,31 +78,24 @@ namespace GestionaleRistorante.Mosconi
             Cibo v;
             v.Ingredienti = new string[4];
 
-            string[] caratteri = new string[7] { "|", ",", "_", "#", "@", "°", "^" };
-            int[] fineCaratteri = new int[7];
-            for (int j = 0; j < 7; j++)
-            {
-                for (int i = 1; i < line.Length; i++)
-                {
-                    if (line.Substring(i, 1) == caratteri[j])
-                    {
-                        fineCaratteri[j] = i;
-                    }
-                }
-            }
+            string[] campi = line.Split(';');
 
-            v.Nome = line.Substring(1, fineCaratteri[0] - 1);
-            v.Prezzo = double.Parse(line.Substring(fineCaratteri[0] + 2, (fineCaratteri[1]) - (fineCaratteri[0] + 2)));
-            v.Portata = line.Substring(fineCaratteri[1] + 2, (fineCaratteri[2] - 1) - (fineCaratteri[1] + 2)+1);
-            v.Ingredienti[0] = line.Substring(fineCaratteri[2] + 2, (fineCaratteri[3] - 1) - (fineCaratteri[2] + 2)+1);
-            v.Ingredienti[1] = line.Substring(fineCaratteri[3] + 2, (fineCaratteri[4] - 1) - (fineCaratteri[3] + 2)+1);
-            v.Ingredienti[2] = line.Substring(fineCaratteri[4] + 2, (fineCaratteri[5] - 1) - (fineCaratteri[4] + 2)+1);
-            v.Ingredienti[3] = line.Substring(fineCaratteri[5] + 2, (line.Length - 1) - (fineCaratteri[5] + 2));
+            v.Nome = campi[0];
+            v.Prezzo = double.Parse(campi[1]);
+            v.Portata = campi[2];
+            v.Ingredienti[0] = campi[3];
+            v.Ingredienti[1] = campi[4];
+            v.Ingredienti[2] = campi[5];
+            v.Ingredienti[3] = campi[6];
+
             return v;
         }
 
         private void Form5_FormClosing(object sender, FormClosingEventArgs e)
         {
+            textBox1.Text = "";
+
+            e.Cancel = true;
             this.Visible = false;
         }
     }

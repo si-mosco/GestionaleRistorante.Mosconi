@@ -30,7 +30,7 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Application.Exit();
+            Environment.Exit(1);
         }
 
         private void button1_Click(object sender, EventArgs e)
