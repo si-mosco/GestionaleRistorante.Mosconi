@@ -46,15 +46,35 @@ namespace GestionaleRistorante.Mosconi
                 Piatto.Ingredienti[i] = "";
 
             bool tri = false;
-            try
+            if (textBox1.Text != "")
             {
-                Piatto.Nome = textBox1.Text;
+                bool control = false;
+                using (StreamReader sr = new StreamReader(filename))
+                {
+                    string line = sr.ReadLine();
+                    while (line != "+" && !control)
+                    {
+                        //MessageBox.Show($"'{line}'");
+                        string[] carta = line.Split(';');
+                        if (textBox1.Text.ToUpper() == carta[0])
+                            control = true;
+                        line = sr.ReadLine();
+                    }
+                }
+
+                if (control)
+                {
+                    MessageBox.Show($"Il nome è già esistente");
+                    textBox1.Text = "";
+                    tri = true;
+                }
+                else
+                    Piatto.Nome = textBox1.Text.ToUpper();
             }
-            catch
+            else
             {
-                MessageBox.Show("Nome non valido");
-                textBox1.Text = "";
                 tri = true;
+                MessageBox.Show($"Nome non valido");
             }
 
             try

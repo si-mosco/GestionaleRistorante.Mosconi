@@ -30,7 +30,6 @@ namespace GestionaleRistorante.Mosconi
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
             this.listView1 = new System.Windows.Forms.ListView();
             this.SuspendLayout();
             // 
@@ -48,19 +47,6 @@ namespace GestionaleRistorante.Mosconi
             this.label1.Text = "Visualizza";
             this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // button1
-            // 
-            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15F);
-            this.button1.ForeColor = System.Drawing.SystemColors.ControlDarkDark;
-            this.button1.Location = new System.Drawing.Point(951, 39);
-            this.button1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(190, 46);
-            this.button1.TabIndex = 35;
-            this.button1.Text = "Start";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // listView1
             // 
             this.listView1.HideSelection = false;
@@ -77,11 +63,11 @@ namespace GestionaleRistorante.Mosconi
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(1177, 674);
             this.Controls.Add(this.listView1);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Form7";
             this.Text = "Visualizza";
+            this.Activated += new System.EventHandler(this.Form7_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form7_FormClosing);
             this.Load += new System.EventHandler(this.Form7_Load);
             this.ResumeLayout(false);
@@ -92,7 +78,6 @@ namespace GestionaleRistorante.Mosconi
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ListView listView1;
     }
 }

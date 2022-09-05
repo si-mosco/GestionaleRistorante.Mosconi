@@ -17,8 +17,13 @@ namespace GestionaleRistorante.Mosconi
         public Form7()
         {
             InitializeComponent();
-        }
 
+            listView1.Columns.Add("Nome");
+            listView1.Columns.Add("Prezzo");
+            listView1.Columns.Add("Portata");
+            listView1.Columns.Add("Ingredienti");
+        }
+        string filename = @"Menù.txt";
         public struct Cibo
         {
             public string Nome;
@@ -29,54 +34,41 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form7_Load(object sender, EventArgs e)
         {
+            listView1.Items.Clear();
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
 
-            listView1.Columns.Add("Nome");
-            listView1.Columns.Add("Prezzo");
-            listView1.Columns.Add("Portata");
-            listView1.Columns.Add("Ingredienti");
-
-
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            StreamReader sr = new StreamReader((@"./Menù.txt"));
-            string line = sr.ReadLine();
-
-            string[] cose = line.Split(';');
-            string[] items2 = new string[cose.Length - 1];
-            for (int i = 0; i < items2.Length; i++)
-                items2[i] = cose[i];
-
-            ListViewItem item = new ListViewItem(items2);
-            listView1.Items.Add(item);
-            /*
-            string line = "";
-
-            StreamReader sr = new StreamReader((@"./Menù.txt"));
-
-            line = sr.ReadLine();
-            while (line!="+")
+            using (StreamReader sr = new StreamReader(filename))
             {
-                if (line.Substring(0, 1) != "§")
+                string line = sr.ReadLine();
+
+                while (line != "+")
                 {
-                    //Cibo finale = Estrai(line);
-                    //MessageBox.Show($"PORTATA: {finale.Portata}\nNOME: {finale.Nome}\nINGREDIENTI: {finale.Ingredienti[0]}, {finale.Ingredienti[1]}, {finale.Ingredienti[2]}, {finale.Ingredienti[3]}\nPREZZO: €{finale.Prezzo}");
+                    string[] cose = line.Split(';');
+                    string[] items2 = new string[cose.Length - 1];
+                    for (int i = 0; i < items2.Length; i++)
+                        items2[i] = cose[i];
+
+                    ListViewItem item = new ListViewItem(items2);
+                    listView1.Items.Add(item);
+
+                    line = sr.ReadLine();
                 }
-                line = sr.ReadLine();
+
             }
-            MessageBox.Show("Fine");*/
-        }
-        public static void Estrai(string line, string[] items)
-        {
-            items = line.Split(';');
+
+
         }
 
         private void Form7_FormClosing(object sender, FormClosingEventArgs e)
         {
+            e.Cancel = true;
             this.Visible = false;
+        }
+
+        private void Form7_Activated(object sender, EventArgs e)
+        {
+            Form7_Load(sender, e);
         }
     }
 }
