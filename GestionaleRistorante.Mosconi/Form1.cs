@@ -42,7 +42,8 @@ namespace GestionaleRistorante.Mosconi
                 textBox2.Text = "";
             }
             this.Hide();
-            Proprietario.Show();
+            //Proprietario.Show();
+            Cliente.Show();
         }
     }
 }

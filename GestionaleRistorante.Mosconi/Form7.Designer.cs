@@ -52,7 +52,7 @@ namespace GestionaleRistorante.Mosconi
             this.listView1.HideSelection = false;
             this.listView1.Location = new System.Drawing.Point(45, 137);
             this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(870, 495);
+            this.listView1.Size = new System.Drawing.Size(726, 495);
             this.listView1.TabIndex = 36;
             this.listView1.UseCompatibleStateImageBehavior = false;
             // 
@@ -61,7 +61,7 @@ namespace GestionaleRistorante.Mosconi
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(1177, 674);
+            this.ClientSize = new System.Drawing.Size(811, 674);
             this.Controls.Add(this.listView1);
             this.Controls.Add(this.label1);
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);

@@ -18,10 +18,10 @@ namespace GestionaleRistorante.Mosconi
         {
             InitializeComponent();
 
-            listView1.Columns.Add("Nome");
-            listView1.Columns.Add("Prezzo");
-            listView1.Columns.Add("Portata");
-            listView1.Columns.Add("Ingredienti");
+            listView1.Columns.Add("Nome", 75);
+            listView1.Columns.Add("Prezzo", 60);
+            listView1.Columns.Add("Portata", 75);
+            listView1.Columns.Add("Ingredienti", 270);
         }
         string filename = @"Menù.txt";
         public struct Cibo
@@ -54,10 +54,7 @@ namespace GestionaleRistorante.Mosconi
 
                     line = sr.ReadLine();
                 }
-
             }
-
-
         }
 
         private void Form7_FormClosing(object sender, FormClosingEventArgs e)
