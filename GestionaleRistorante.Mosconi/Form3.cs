@@ -28,6 +28,7 @@ namespace GestionaleRistorante.Mosconi
 
         double prezzofin = 0;
         string filename = @"Menù.txt";
+        bool chiusura = true;
         public struct Cibo
         {
             public string Nome;
@@ -37,7 +38,7 @@ namespace GestionaleRistorante.Mosconi
         }
 
         private void Form3_Load(object sender, EventArgs e)
-        {
+        { 
             listView1.Items.Clear();
             listView1.View = View.Details;
             listView1.FullRowSelect = true;
@@ -72,6 +73,7 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form3_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if(chiusura)
             Environment.Exit(1);
         }
 
@@ -138,6 +140,23 @@ namespace GestionaleRistorante.Mosconi
 
             for (int i = 0; i < listuccia.Items[ind1].SubItems.Count - 1; i++)
                 listuccia.Items[ind1].SubItems[i].Text = backup1[i];
+        }
+
+        private void listView2_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            if (listView2.SelectedItems.Count > 0)
+            {
+                textBox1.Text = $"{double.Parse(textBox1.Text) - double.Parse(listView2.SelectedItems[0].SubItems[1].Text)}";
+
+
+                listView2.SelectedItems[0].Remove();
+            }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            chiusura = false;
+            this.Close();
         }
     }
 }

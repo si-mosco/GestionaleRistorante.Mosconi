@@ -18,6 +18,8 @@ namespace GestionaleRistorante.Mosconi
         Form7 Visualizza = new Form7();
         Form8 Elimina = new Form8();
         Form9 Recupera = new Form9();
+
+        bool chiusura = true;
         public Form2()
         {
             InitializeComponent();
@@ -30,6 +32,7 @@ namespace GestionaleRistorante.Mosconi
 
         private void Form2_FormClosing(object sender, FormClosingEventArgs e)
         {
+            if(chiusura)
             Environment.Exit(1);
         }
 
@@ -61,6 +64,11 @@ namespace GestionaleRistorante.Mosconi
         private void button6_Click(object sender, EventArgs e)
         {
             Recupera.Show();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            chiusura = false;
         }
     }
 }

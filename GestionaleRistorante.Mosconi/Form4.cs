@@ -70,6 +70,10 @@ namespace GestionaleRistorante.Mosconi
                 }
                 else
                     Piatto.Nome = textBox1.Text.ToUpper();
+
+                for (int i = 0; i < textBox1.Text.Length; i++)
+                    if (textBox1.Text.Substring(i, 1) == ";") tri = true;
+
             }
             else
             {
@@ -99,9 +103,20 @@ namespace GestionaleRistorante.Mosconi
             try
             { 
                 Piatto.Ingredienti[0] = textBox4.Text;
+                for (int i = 0; i < textBox4.Text.Length; i++)
+                    if (textBox4.Text.Substring(i, 1) == ";") tri = true;
+
                 Piatto.Ingredienti[1] = textBox5.Text;
+                for (int i = 0; i < textBox5.Text.Length; i++)
+                    if (textBox5.Text.Substring(i, 1) == ";") tri = true;
+
                 Piatto.Ingredienti[2] = textBox6.Text;
+                for (int i = 0; i < textBox6.Text.Length; i++)
+                    if (textBox6.Text.Substring(i, 1) == ";") tri = true;
+
                 Piatto.Ingredienti[3] = textBox7.Text;
+                for (int i = 0; i < textBox7.Text.Length; i++)
+                    if (textBox7.Text.Substring(i, 1) == ";") tri = true;
             }
             catch
             {
